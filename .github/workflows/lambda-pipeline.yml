@@ -4,8 +4,33 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
+  less_than_24_hours:
+    name: Branch less than 24 hours
+    runs-on: ubuntu-latest
+    steps:
+      run: |
+        apt update
+        apt install git
+        current_head=$(git rev-parse HEAD)
+        last_merge=$(git rev-list --min-parents=2 --max-count=1 HEAD)
+        first_commit=$(git log --pretty=format:"%h" $last_merge..$current_head |  tail -n 1)
+        branch_date=$(git show -s --format=%cd --date=unix $first_commit)
+        current_time=$(date +%s)
+        time_difference=$(( $current_time - $branch_date ))
+        twenty_four_hours=$((60*60*24))
+        if [ $time_difference -gt $twenty_four_hours ];then
+            echo "Branch is older than 24 hours";
+            exit 1
+            else
+            exit 0
+            fi
+          fi
+
   unit-test:
     name: Run unit tests
     runs-on: ubuntu-latest
@@ -21,7 +46,10 @@ jobs:
           npm run test
 
   deploy-prod:
+    name: Production Deployment
     runs-on: ubuntu-latest
+    needs: [unit-test]
+    environment: prod
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
