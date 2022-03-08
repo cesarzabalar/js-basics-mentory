@@ -14,7 +14,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16.3.0'
-        cache: 'npm'
+          cache: 'npm'
       - name: tests
         run: |
           npm i
@@ -27,7 +27,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16.3.0'
-        cache: 'npm'
+          cache: 'npm'
       - run: npm install
       - name: Serverles Deploy
         uses: serverless/github-action@v2
