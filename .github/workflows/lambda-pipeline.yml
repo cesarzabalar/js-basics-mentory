@@ -14,8 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          apt update
-          apt install git
+          sudo apt update
+          sudo apt install git
           current_head=$(git rev-parse HEAD)
           last_merge=$(git rev-list --min-parents=2 --max-count=1 HEAD)
           first_commit=$(git log --pretty=format:"%h" $last_merge..$current_head |  tail -n 1)
