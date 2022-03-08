@@ -1,0 +1,5 @@
+// create for node.js template
+sls create --template aws-nodejs
+
+//invoke a function
+sls invoke -f <funcion-name> -d "data to send"
