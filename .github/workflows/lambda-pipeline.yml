@@ -13,7 +13,8 @@ jobs:
     name: Branch less than 24 hours
     runs-on: ubuntu-latest
     steps:
-      - run: |
+      - uses: actions/checkout@v2
+        run: |
           sudo apt update
           sudo apt install git
           current_head=$(git rev-parse HEAD)
