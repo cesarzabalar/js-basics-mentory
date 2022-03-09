@@ -4,7 +4,6 @@
 // __dirname
 const file = 'src/samples/myFile.csv'
 
-const { rejects } = require('assert')
 const fs = require('fs')
 
 
@@ -29,7 +28,6 @@ function readfile2(path) {
         })
     })
 }
-
 
 readfile2(file)
     .then(data => {
