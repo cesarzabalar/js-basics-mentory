@@ -71,10 +71,10 @@
         }
       }
     },
-    "LambdaTestFunctionLogGroup": {
+    "MentoryLambdaTestLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/lambdaTestFunction-dev"
+        "LogGroupName": "/aws/lambda/mentoryLambdaTest"
       }
     },
     "IamRoleLambdaExecution": {
@@ -102,8 +102,8 @@
               "Fn::Join": [
                 "-",
                 [
-                  "serverless-mentory-test",
-                  "dev",
+                  "lambda-practice",
+                  "cesar",
                   "lambda"
                 ]
               ]
@@ -119,7 +119,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/lambdaTestFunction-dev:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/mentoryLambdaTest:*"
                     }
                   ]
                 },
@@ -130,7 +130,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/lambdaTestFunction-dev:*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/mentoryLambdaTest:*:*"
                     }
                   ]
                 }
@@ -143,8 +143,8 @@
           "Fn::Join": [
             "-",
             [
-              "serverless-mentory-test",
-              "dev",
+              "lambda-practice",
+              "cesar",
               {
                 "Ref": "AWS::Region"
               },
@@ -154,21 +154,21 @@
         }
       }
     },
-    "LambdaTestFunctionLambdaFunction": {
+    "MentoryLambdaTestLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-mentory-test/dev/1646694211837-2022-03-07T23:03:31.837Z/serverless-mentory-test.zip"
+          "S3Key": "serverless/lambda-practice/cesar/1646926029092-2022-03-10T15:27:09.092Z/lambda-practice.zip"
         },
-        "Handler": "src/lambda/index.handler",
+        "Handler": "src/handler.main",
         "Runtime": "nodejs14.x",
-        "FunctionName": "lambdaTestFunction-dev",
-        "MemorySize": 1024,
-        "Timeout": 6,
-        "Description": "lambda for mentory example",
+        "FunctionName": "mentoryLambdaTest",
+        "MemorySize": 256,
+        "Timeout": 3,
+        "Description": "Lambda for test",
         "Role": {
           "Fn::GetAtt": [
             "IamRoleLambdaExecution",
@@ -177,24 +177,24 @@
         }
       },
       "DependsOn": [
-        "LambdaTestFunctionLogGroup"
+        "MentoryLambdaTestLogGroup"
       ]
     },
-    "LambdaTestFunctionLambdaVersionDiPsD2oybitp049J6T7zljX6JvaL1awzYnW6x1rxNQY": {
+    "MentoryLambdaTestLambdaVersion3UgifMLBOa4GpFmsK6gmiRIBlVHUpCzoQBGQPd9XY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
-          "Ref": "LambdaTestFunctionLambdaFunction"
+          "Ref": "MentoryLambdaTestLambdaFunction"
         },
-        "CodeSha256": "SbX+9hKDcxVJcKiZmnJ38OJgHf3KtXdwcl8f/Y5K2tY=",
-        "Description": "lambda for mentory example"
+        "CodeSha256": "Fo+q9JSjAJU3+4zAeQAz136vgqSMPYPAw7L68iLWfk0=",
+        "Description": "Lambda for test"
       }
     },
     "HttpApi": {
       "Type": "AWS::ApiGatewayV2::Api",
       "Properties": {
-        "Name": "dev-serverless-mentory-test",
+        "Name": "cesar-lambda-practice",
         "ProtocolType": "HTTP",
         "CorsConfiguration": {
           "AllowHeaders": [
@@ -228,12 +228,12 @@
         }
       }
     },
-    "LambdaTestFunctionLambdaPermissionHttpApi": {
+    "MentoryLambdaTestLambdaPermissionHttpApi": {
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "FunctionName": {
           "Fn::GetAtt": [
-            "LambdaTestFunctionLambdaFunction",
+            "MentoryLambdaTestLambdaFunction",
             "Arn"
           ]
         },
@@ -265,7 +265,7 @@
         }
       }
     },
-    "HttpApiIntegrationLambdaTestFunction": {
+    "HttpApiIntegrationMentoryLambdaTest": {
       "Type": "AWS::ApiGatewayV2::Integration",
       "Properties": {
         "ApiId": {
@@ -274,34 +274,34 @@
         "IntegrationType": "AWS_PROXY",
         "IntegrationUri": {
           "Fn::GetAtt": [
-            "LambdaTestFunctionLambdaFunction",
+            "MentoryLambdaTestLambdaFunction",
             "Arn"
           ]
         },
         "PayloadFormatVersion": "2.0",
-        "TimeoutInMillis": 6500
+        "TimeoutInMillis": 3500
       }
     },
-    "HttpApiRoutePostEndpoint": {
+    "HttpApiRoutePostProductsCreate": {
       "Type": "AWS::ApiGatewayV2::Route",
       "Properties": {
         "ApiId": {
           "Ref": "HttpApi"
         },
-        "RouteKey": "POST /endpoint",
+        "RouteKey": "POST /products/create",
         "Target": {
           "Fn::Join": [
             "/",
             [
               "integrations",
               {
-                "Ref": "HttpApiIntegrationLambdaTestFunction"
+                "Ref": "HttpApiIntegrationMentoryLambdaTest"
               }
             ]
           ]
         }
       },
-      "DependsOn": "HttpApiIntegrationLambdaTestFunction"
+      "DependsOn": "HttpApiIntegrationMentoryLambdaTest"
     }
   },
   "Outputs": {
@@ -310,16 +310,16 @@
         "Ref": "ServerlessDeploymentBucket"
       },
       "Export": {
-        "Name": "sls-serverless-mentory-test-dev-ServerlessDeploymentBucketName"
+        "Name": "sls-lambda-practice-cesar-ServerlessDeploymentBucketName"
       }
     },
-    "LambdaTestFunctionLambdaFunctionQualifiedArn": {
+    "MentoryLambdaTestLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "LambdaTestFunctionLambdaVersionDiPsD2oybitp049J6T7zljX6JvaL1awzYnW6x1rxNQY"
+        "Ref": "MentoryLambdaTestLambdaVersion3UgifMLBOa4GpFmsK6gmiRIBlVHUpCzoQBGQPd9XY"
       },
       "Export": {
-        "Name": "sls-serverless-mentory-test-dev-LambdaTestFunctionLambdaFunctionQualifiedArn"
+        "Name": "sls-lambda-practice-cesar-MentoryLambdaTestLambdaFunctionQualifiedArn"
       }
     },
     "HttpApiId": {
@@ -328,7 +328,7 @@
         "Ref": "HttpApi"
       },
       "Export": {
-        "Name": "sls-serverless-mentory-test-dev-HttpApiId"
+        "Name": "sls-lambda-practice-cesar-HttpApiId"
       }
     },
     "HttpApiUrl": {
@@ -353,7 +353,7 @@
         ]
       },
       "Export": {
-        "Name": "sls-serverless-mentory-test-dev-HttpApiUrl"
+        "Name": "sls-lambda-practice-cesar-HttpApiUrl"
       }
     }
   }
