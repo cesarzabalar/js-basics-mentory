@@ -9,6 +9,6 @@ const requestConfig = {
         'Content-Length': 0
     },
     body: null
-}
+};
 
-module.exports = Object.seal(requestConfig)
+module.exports = Object.seal(requestConfig);

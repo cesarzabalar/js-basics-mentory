@@ -5,8 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "nodemon ./src/functions.js",
-    "configure-husky": "npx husky install && node node_modules/.bin/husky add .husky/pre-commit \"npx --no-install lint-staged\"",
-    "prepare": "husky install",
     "lint": "eslint src/ --ext .js",
     "lint-fix": "eslint src/ --ext .js --fix",
     "prettier-format": "prettier --config .prettierrc.json src/**/*.js --write",
@@ -18,7 +16,7 @@
   "license": "ISC",
   "devDependencies": {
     "eslint": "^8.11.0",
-    "husky": "^7.0.4",
+    "husky": "^7.0.0",
     "jest": "^27.5.1",
     "lint-staged": "^12.3.5",
     "nodemon": "^2.0.15",

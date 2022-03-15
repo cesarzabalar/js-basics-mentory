@@ -1,18 +1,18 @@
-'use strict'
+'use strict';
 
 function myPromise(status = true) {
     return new Promise(function(resolve, reject){
-        status && resolve('success')
-        reject('fail')
-    })
+        status && resolve('success');
+        reject('fail');
+    });
 }
 
 myPromise(false)
     .then(data => {
-        console.log(data)
+        console.log(data);
     })
-    .catch(onFailure)
+    .catch(onFailure);
 
 function onFailure(err){
-    console.log(err)
+    console.log(err);
 }

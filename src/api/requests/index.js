@@ -8,4 +8,4 @@ module.exports = (serviceName) => {
         default:
             break;
     }
-}
+};

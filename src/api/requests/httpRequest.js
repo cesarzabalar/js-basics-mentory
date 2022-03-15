@@ -3,7 +3,7 @@ const { URL } = require('url');
 
 const request = (requestOptions) => {
 
-    const url = new URL(requestOptions.url)
+    const url = new URL(requestOptions.url);
     requestOptions.hostname = url.hostname;
     requestOptions.path = url.pathname + url.search;
 
@@ -20,7 +20,7 @@ const request = (requestOptions) => {
 
             res.on('data', (chunk) => {
                 body += chunk;
-                chunks.push(chunk)
+                chunks.push(chunk);
             });
 
             res.on('end', () => {
@@ -29,7 +29,7 @@ const request = (requestOptions) => {
                     statusCode: res.statusCode,
                     headers: res.headers
                 });
-            })
+            });
         });
 
         req.on('error', (e) => {
@@ -40,8 +40,8 @@ const request = (requestOptions) => {
             req.write(postParams, 'utf8');
         }
 
-        req.end()
+        req.end();
     });
-}
+};
 
 module.exports = request;

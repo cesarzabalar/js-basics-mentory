@@ -1,20 +1,20 @@
-'use strict'
+'use strict';
 // filesystem or fs module
 
 // __dirname
-const file = 'src/samples/myFile.csv'
+const file = 'src/samples/myFile.csv';
 
-const fs = require('fs')
+const fs = require('fs');
 
 
 function readfile(path, cb) {
     fs.readFile(path, (err, data) => {
         if(err){
-            console.log(err)
+            console.log(err);
         }
         // Buffer
-        cb(data.toString())
-    })
+        cb(data.toString());
+    });
 }
 
 function readfile2(path) {
@@ -22,20 +22,20 @@ function readfile2(path) {
 
         fs.readFile(path, (err, data) => {
             if(err){
-                reject(err)
+                reject(err);
             }
-            resolve(data.toString())
-        })
-    })
+            resolve(data.toString());
+        });
+    });
 }
 
 readfile2(file)
     .then(data => {
-        console.log(data)
+        console.log(data);
     })
     .catch(err => {
-        console.log(err.message)
-    })
+        console.log(err.message);
+    });
 
 //use with callback
 

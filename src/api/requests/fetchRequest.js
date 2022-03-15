@@ -8,7 +8,7 @@ const request = async(requestOptions) => {
         })
         .catch(err => {
             throw new Error(err.message);
-        })
-}
+        });
+};
 
 module.exports = request;

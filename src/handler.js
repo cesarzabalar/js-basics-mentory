@@ -17,4 +17,4 @@ const main = async (event) => {
   // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
 };
 
-module.exports.main = main
+module.exports.main = main;
