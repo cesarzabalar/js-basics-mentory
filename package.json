@@ -5,14 +5,24 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "nodemon ./src/functions.js",
+    "configure-husky": "npx husky install && node node_modules/.bin/husky add .husky/pre-commit \"npx --no-install lint-staged\"",
+    "prepare": "husky install",
+    "lint": "eslint src/ --ext .js",
+    "lint-fix": "eslint src/ --ext .js --fix",
+    "prettier-format": "prettier --config .prettierrc.json src/**/*.js --write",
+    "format": "npm run lint-fix && npm run prettier-format",
     "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "eslint": "^8.11.0",
+    "husky": "^7.0.4",
     "jest": "^27.5.1",
-    "nodemon": "^2.0.15"
+    "lint-staged": "^12.3.5",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1"
   },
   "dependencies": {
     "axios": "0.26.0",
