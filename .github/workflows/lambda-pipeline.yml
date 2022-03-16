@@ -50,9 +50,9 @@ jobs:
   deployment:
     name: Deployment
     runs-on: ubuntu-latest
+    environment: prod
     needs: [unit-test]
     if: github.ref == 'refs/heads/master'
-      environment: prod
       steps:
         - name: Checkout code
           uses: actions/checkout@v2
