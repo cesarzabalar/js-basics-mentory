@@ -13,10 +13,10 @@ readableStream.setEncoding('UTF8');
 
 //option 1
 let data = '';
-readableStream.on('data', chunk => {
-    data += chunk;
+readableStream.on('data', (chunk) => {
+	data += chunk;
 });
 
 readableStream.on('end', () => {
-    console.log(data);
+	console.log(data);
 });

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 // in memory data
 // raw data
 
@@ -17,7 +16,7 @@ console.log('abc', abc);
 
 // // data to data, byte to byte
 for (let index = 0; index < abc.length; index++) {
-  abc[index] = index + 97;
+	abc[index] = index !== 5 ? index + 97 : '';
 }
 
 console.log('abc', abc.toString());

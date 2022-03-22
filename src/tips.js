@@ -11,7 +11,6 @@ console.log(number);
 console.log(number2);
 console.log(number3);
 
-
 // 2. convertir a Boolean
 const data2 = 100;
 const boolean = Boolean(data2);
@@ -34,47 +33,45 @@ console.log(text4);
 
 // 4. ternarios
 
-const result = (7 > 20) ? true : false;
+const result = 7 > 20 ? true : false;
 console.log(result);
 
 // 5. operadores de corto circuito (&& ||)
 const name = 'camilo';
-function greeting(name){
-    console.log(`Hello ${name}`);
+function greeting(name) {
+	console.log(`Hello ${name}`);
 }
 
 name && greeting(name);
 
 // ||
 const names = '';
-function greeting2(){
-    console.log('Helloxx');
+function greeting2() {
+	console.log('Helloxx');
 }
 
 names || greeting2();
-
 
 // 6. Nullish operator (??)
 
 const myVar = '';
 function noData() {
-    console.log('the property is null or undefined');
+	console.log('the property is null or undefined');
 }
 
 myVar ?? noData();
 
 // 7. default params
-function foods(breakfast, lunch, dinner = 'something' ) {
-}
+function foods(breakfast, lunch, dinner = 'something') {}
 
 //  7. optional chaining
 const person = {
-    name: 'Jorge',
-    lastName: 'Caro',
-    address: {
-        country: 'Colombia',
-        City: 'Cali'
-    }
+	name: 'Jorge',
+	lastName: 'Caro',
+	address: {
+		country: 'Colombia',
+		City: 'Cali',
+	},
 };
 
 console.log(person.address?.country?.code);
